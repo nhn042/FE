@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Definitions from '../Definitions/Definitions.js';
 import {FaVolumeUp, FaMicrophone} from 'react-icons/fa';
+import categories from "../../data/category";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition
@@ -15,7 +16,10 @@ const mic = new SpeechRecognition()
 function Search() {
     const [isListening, setIsListening] = useState(false)
     const [word, setWord] = useState("");
+    const [category, setCategory] = useState('Viet');
     const [meanings, setMeanings] = useState([]);
+    const [response, setResponse] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         handleListen()
@@ -51,68 +55,155 @@ function Search() {
         }
       }
 
-      const handleSaveNote = () => {
-        setSavedNotes([...savedNotes, word])
-        setWord('')
-      }
-
+      // const handleSaveNote = () => {
+      //   setSavsedNotes([...savedNotes, word])
+      //   setWord('')
+      // }
+    const reset = () => {
+      setMeanings([]);
+      setWord("")
+      setResponse(false)
+    }
     const handleSubmit = async e => {
+      try {
         e.preventDefault();
-        axios.get(`http://localhost:8080/dictionary?query=${word}`, word)
+        axios.get(`http://localhost:8080/dictionary/${category}?query=${word}`, word)
         .then(res => {
             console.log(res.data);
             setMeanings(res.data);
+            setResponse(true);
         })
+      } catch (err) {
+        setError(err);
+      }
     }
     useEffect(() => {
-        if(!word.trim()) return;
+        if(!word.trim()) return reset();
         const debouce = setTimeout(() => {
         }, 1000)
         return () => clearTimeout(debouce)
-    }, [word])
+    }, [word, category])
 
+    if(error) {
+      return <h3>No Definitions Found 😥</h3>
+    }
+
+    console.log(meanings.listSequenceText);
     return (
-        <div>
-            <h2>Dictionary</h2>
+      <div>
+        <h2 className='header'>DICTIONARY</h2>
         <div className="panel">
-            <div className="right-panel">
-                <div>
-                    <select>
-                    <option value="tieng viet">Việt</option>
-                    <option value="tieng tay">Tày</option>
-                    </select>
-                </div>
-                <div className="search-box">
-                    <textarea 
-                    placeholder="Search..." 
-                    value={word} 
-                    onChange={e => setWord(e.target.value)}>
-                    </textarea>
-                    <span onClick={() => setIsListening(prevState => !prevState)} 
-                    className='microphone'><FaMicrophone /></span>
-                    <span className='volume'><FaVolumeUp /></span>
-                </div>
-            </div>
-            <div className="left-panel">
+          <div className="right-panel">
             <div>
-                    <select>
-                    <option value="tieng viet">Tày</option>
-                    <option value="tieng tay">Việt</option>
-                    </select>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {categories.map((option, index) => (
+                  <option key={index}>{option.value}</option>
+                ))}
+              </select>
             </div>
-            <textarea defaultValue={
-                meanings.map((meanings, index) => (
-                    meanings.translatedWord
-                ))
-            }/>
+            <div className="search-box">
+              <textarea
+                placeholder="Search..."
+                value={word}
+                onChange={(e) => setWord(e.target.value)}
+              ></textarea>
+              <span
+                onClick={() => setIsListening((prevState) => !prevState)}
+                className="microphone"
+              >
+                <FaMicrophone />
+              </span>
+              <span className="volume">
+                <FaVolumeUp />
+              </span>
+            </div>
+          </div>
+         <div className="left-panel">
+            <div>
+              <select>
+                <option value="Tay">Tay</option>
+                <option value="Viet">Viet</option>
+              </select>
+            </div>      
+            {
+            category === "Viet" && (meanings.listSequenceText ?
+            (
+              <div className='box-meaning'> 
+                  {
+                      meanings.listSequenceText?.map((meaning, index) =>(
+                              <div key={index}>
+                                      <p className='contain'>
+                                      - {meaning}
+                                      </p>
+                              </div>
+                      ))
 
+                  }
+              </div>
+            )
+              :
+              (
+              <div className='box-meaning'> 
+                  {
+                      meanings.map((meaning, index) =>(
+                              <div key={index} className='contain'>
+                                      <p>
+                                      - {meaning.idTay.word} 
+                                      </p>
+                              </div>
+                      ))
+                  }
+              </div>
+              )
+              )}
+            {
+            category === "Tay" && (meanings.listSequenceText ?
+              (
+                <div className='box-meaning'> 
+                    {
+                        meanings.listSequenceText?.map((meaning, index) =>(
+                                <div key={index}>
+                                        <p className='contain'>
+                                        - {meaning}
+                                        </p>
+                                </div>
+                        ))
+  
+                    }
+                </div>
+              )
+              :
+              (
+          <div className='box-meaning'> 
+                  {
+                      meanings.map((meaning, index) =>(
+                              <div key={index} className='contain'>
+                                      <p>
+                                      - {meaning.idVi.word} 
+                                      </p>
+                              </div>
+                      ))
+                  }
             </div>
+            )
+            )}
+          </div>
         </div>
-        <div className='button'>
-        <button className='search' onClick={handleSubmit}> Search </button>
+        <div className="button">
+          <button className="search" onClick={handleSubmit}>
+            {" "}
+            Search{" "}
+          </button>
         </div>
-            {(<Definitions word={word} meanings={meanings}/>)}
-        </div>
+        
+        {
+          !meanings.listSequenceText && response && (
+          <Definitions word={word} meanings={meanings} /> 
+        )}
+      </div>
     );
 }
 

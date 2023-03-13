@@ -1,0 +1,78 @@
+{
+  "auth": {
+    "title": "Dictionary",
+    "dotLeftPart": "..",
+    "login": {
+      "loginTitle": "Log in",
+      "login": "Log in",
+      "logout": "Log out",
+      "workEmailFormTitle": "Work Email",
+      "workEmailPlaceholder": "Input your work email",
+      "passwordTitle": "Password",
+      "newPasswordTitle": "New Password",
+      "passwordPlaceholder": "Input your password",
+      "newPasswordPlaceholder": "Input your new password",
+      "forgotPassword": "Forgot the password?",
+      "Register": "Don't have an account?",
+      "signUp": "Sign up",
+      "changePassword": "Password",
+      "incorrectAccountError": "Incorrect email or password",
+      "serverError": "Internal Server Error",
+      "passwordFormatError": "Password must be at least 8 characters!"
+    },
+    "forgotPassword": {
+      "forgotPasswordTitle": "Forgot your password",
+      "message1": "Enter your Work Email below and we will send a message to reset your password.",
+      "message2": "",
+      "emailTitle": "Work Email",
+      "backLogIn": "Back to Log In",
+      "checkEmail": "Invalid Email Address",
+      "continue": "Continue",
+      "changePassword": "Change Password",
+      "notificationSentMail1": "We have sent a password reset code by email to",
+      "notificationSentMail2": "Enter it below to reset your password.",
+      "code": "Code",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Password must be at least 8 characters",
+      "changePassSuccess": "Your password has been changed successfully",
+      "confirmPasswordFormTitle": "Enter New Password Again",
+      "save": "Save",
+      "limitTimeError": "Attempt limit exceeded, please try after some time",
+      "invalidCodeError": "Invalid verification code provided, please try again."
+    },
+    "signUp": {
+      "name": "Name",
+      "signUp": "Sign Up",
+      "emailTitle": "Work Email",
+      "passwordTitle": "Password",
+      "workNamePlaceholder": "Input your name",
+      "workEmailPlaceholder": "Input your work email",
+      "confirmPasswordTitle": "Confirm Password",
+      "passwordPlaceholder": "Input your password",
+      "newPasswordPlaceholder": "Confirm your password"
+    },
+    "Update": {
+      "Name": "Họ và tên",
+      "Email": "Email",
+      "updateInfor": "Cập nhật thông tin cá nhân",
+      "numberPhone": "Số điện thoại",
+      "Address": "Địa chỉ",
+      "Update": "Cập nhật",
+      "Infor": "Thông tin tài khoản",
+      "changePass": "Đổi mật khẩu",
+      "password": "Mật khẩu",
+      "newPassword": "Mật khẩu mới",
+      "workPassPlaceholder": "nhập mật khẩu",
+      "workNewPasssPlaceholder": "nhập mật khẩu mới",
+      "workAddressPlaceholder": "nhập địa chỉ",
+      "workPhonePlaceholder": "nhập số điện thoại",
+      "workEmailPlaceholder": "nhập Email",
+      "workNamePlaceholder": "nhập họ và tên"
+    },
+    "appBar": {
+      "Home": "Home",
+      "Search": "Search"
+    }
+
+  }
+}

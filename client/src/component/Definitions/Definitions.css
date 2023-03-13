@@ -1,0 +1,13 @@
+.description {
+    /* display: flex; */
+    flex-direction: column;
+    width: 100%;
+    color: white;
+    /* border-left: 3px solid #2681dc;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;*/
+} 
+
+.descrip {
+    color: white;
+}

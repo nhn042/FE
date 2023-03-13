@@ -2,20 +2,25 @@ import React from 'react'
 import "./Definitions.css"
 const Definitions = ({word, meanings}) => {
     return (
-        <ul>
+        <div>
+            {meanings && <h3>Description</h3>}
+
+        <div className='description'>
             {
-                meanings.map((meanings, index) => (
-                    <li key={index} className='contain'>
-                    <div>
-                        <h3>Description</h3>
-                                <p>
-                                    {meanings.description}
-                                </p>
-                    </div>
-                </li>
+                meanings.map((meaning, index) => (
+
+                        <div>
+                            {meaning.idTay.description &&
+                            <p className='descrip'>
+                                - {meaning.idTay.description}
+                            </p>
+                            }
+                        </div>
                 ))
+
             }
-        </ul>
+        </div>
+        </div>
     )
 }
 

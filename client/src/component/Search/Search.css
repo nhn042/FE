@@ -6,6 +6,11 @@
     border: 1px solid #bbb;
   }
   
+  .header {
+    color: rgb(38, 0, 255);
+    /* color: white; */
+    text-transform: uppercase;
+  }
   .right-panel {
     width: 100%;
     border-radius: 10px;
@@ -51,6 +56,21 @@
     margin:10px;
   }
 
+  .box-meaning {
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #888;
+    height: 200px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  .meaning {
+    margin-top: 3px;
+    font-size: 15px;
+    font-family: Arial;
+  }
+
   input, select {
     height: 40px;
     padding: 5px 10px;
@@ -64,17 +84,25 @@
     width: 100%;
     box-sizing: border-box;
     padding: 5px 10px;
-    height: 80px;
+    height: 200px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Arial;
   }
   
   p {
     font-weight: 600;
     margin-bottom: 5px;
+    color: black;
   }
 
+  select {
+    font-weight: bold;
+    font-size: medium;
+  }
   
   button {
-    width: 100%;
+    /* width: 100%; */
     background-color: green;
     border: none;
     border-radius: 3px;
